@@ -5,12 +5,13 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mylib"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/bangdaehyeog/Downloads/lombok.jar"/>
+	<classpathentry kind="lib" path="/Users/bangdaehyeog/Documents/공부/mylib/lombok.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
