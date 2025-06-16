@@ -1,6 +1,12 @@
 package oop11;
 
 public class SamsungTV implements TV {
+	public Speaker speaker;
+
+	public void setSpeaker(Speaker speaker) {
+		this.speaker = speaker;
+	}
+	
 	public void powerOn() {
 		System.out.println("SamsungTV : 전원을 켭니다.");
 	}
@@ -10,11 +16,19 @@ public class SamsungTV implements TV {
 	}
 
 	public void soundUp() {
-		System.out.println("SamsungTV : 소리를 키웁니다.");
+		if (speaker == null) {
+			System.out.println("SamsungTV : 소리를 키웁니다.");
+		} else {
+			speaker.soundUp();
+		}
 	}
 
 	public void soundDown() {
-		System.out.println("SamsungTV : 소리를 줄입니다.");
+		if (speaker == null) {
+			System.out.println("SamsungTV : 소리를 줄입니다.");
+		} else {
+			speaker.soundDown();
+		}
 	}
 
 	public void channelUp() {
