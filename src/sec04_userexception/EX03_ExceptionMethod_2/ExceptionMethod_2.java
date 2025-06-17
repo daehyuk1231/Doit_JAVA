@@ -16,6 +16,7 @@ class A {
 
 public class ExceptionMethod_2 {
 	public static void main(String[] args) {
+		
 		A a = new A();
 
 		try {
