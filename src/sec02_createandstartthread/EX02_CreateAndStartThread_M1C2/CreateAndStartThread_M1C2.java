@@ -1,4 +1,4 @@
-package sec02_theneedforthread.EX01_CreateAndStartThread_M1C1;
+package sec02_createandstartthread.EX02_CreateAndStartThread_M1C2;
 
 class SMIFileThread extends Thread {
 	@Override
@@ -18,21 +18,28 @@ class SMIFileThread extends Thread {
 	}
 }
 
-public class CreateAndStartThread_M1C1 {
-	public static void main(String[] args) {
-
-		Thread smiFileThread = new SMIFileThread();
-		smiFileThread.start();
-
+class VideoFileThread extends Thread {
+	@Override
+	public void run() {
 		int[] intArray = { 1, 2, 3, 4, 5 };
 
 		for (int i = 0; i < intArray.length; i++) {
-			System.out.print("(비디오 프레임) " + intArray[i]);
+			System.out.println("(비디오 프레임) " + intArray[i]);
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
 			}
 		}
+	}
+}
+
+public class CreateAndStartThread_M1C2 {
+	public static void main(String[] args) {
+		Thread smiFileThread = new SMIFileThread();
+		smiFileThread.start();
+
+		Thread videoFileThread = new VideoFileThread();
+		videoFileThread.start();
 	}
 
 }
