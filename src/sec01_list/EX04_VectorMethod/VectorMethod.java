@@ -35,7 +35,7 @@ public class VectorMethod {
 		aList3.remove(1);
 		System.out.println(aList3);
 
-		aList3.remove(new Integer(2));
+		aList3.remove(Integer.valueOf(2));
 		System.out.println(aList3);
 
 		aList3.clear();
