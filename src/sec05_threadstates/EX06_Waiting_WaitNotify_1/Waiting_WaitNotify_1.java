@@ -1,7 +1,5 @@
 package sec05_threadstates.EX06_Waiting_WaitNotify_1;
 
-import java.util.Iterator;
-
 class DataBox {
 	int data;
 
