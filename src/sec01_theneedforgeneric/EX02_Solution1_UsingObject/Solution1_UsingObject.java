@@ -28,6 +28,5 @@ public class Solution1_UsingObject {
 		Goods goods2 = new Goods();
 		goods2.setObject(new Apple());
 		Pencil pencil = (Pencil) goods2.getObject();
-
 	}
 }
