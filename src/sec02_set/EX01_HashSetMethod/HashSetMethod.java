@@ -3,10 +3,15 @@ package sec02_set.EX01_HashSetMethod;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 public class HashSetMethod {
 	public static void main(String[] args) {
+		System.out.println(Objects.hash(1,2,3));
+		System.out.println(Objects.hash(2,1,3));
+		System.out.println(Objects.hash("안녕"));
+		System.out.println(Objects.hash("방가"));
 		Set<String> hSet1 = new HashSet<>();
 
 		hSet1.add("가");
