@@ -1,7 +1,7 @@
 package sec01_lambdaexpression.EX07_RefOfStaticMethod_Type2_2;
 
 interface A {
-	int abc(String str);
+	String abc(String str);
 }
 
 public class RefOfStaticMethod_Type2_2 {
@@ -9,16 +9,16 @@ public class RefOfStaticMethod_Type2_2 {
 
 		A a1 = new A() {
 			@Override
-			public int abc(String str) {
-				return str.length();
+			public String abc(String str) {
+				return str.toLowerCase();
 			}
 		};
 
-		A a2 = (String str) -> str.length();
+		A a2 = (String str) -> str.toLowerCase();
 
-		A a3 = String::length;
-		System.out.println(a1.abc("안녕"));
-		System.out.println(a2.abc("안녕"));
-		System.out.println(a3.abc("안녕"));
+		A a3 = String::toUpperCase;
+		System.out.println(a1.abc("HELLO"));
+		System.out.println(a2.abc("HELLO"));
+		System.out.println(a3.abc("hello"));
 	}
 }
