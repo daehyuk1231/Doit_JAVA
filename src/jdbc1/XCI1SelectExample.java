@@ -23,6 +23,8 @@ public class XCI1SelectExample {
 					JOIN_DATE
 				FROM
 					XCI_MEMBERS
+				ORDER BY 
+					BIRTH DESC
 				""";
 		try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 				Statement stmt = conn.createStatement();
