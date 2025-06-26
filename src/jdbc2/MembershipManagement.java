@@ -25,19 +25,13 @@ public class MembershipManagement {
 			int choice = sc.nextInt();
 			sc.nextLine();
 			switch (choice) {
-			case 0:
-				signUp();
-				break;
-			case 1:
-				if (login()) {
+			case 0 -> signUp();
+			case 1 -> {
+				if (login())
 					afterLoginMenu();
-				}
-				break;
-			case 2:
-				System.out.println("프로그램을 종료합니다.");
-				return;
-			default:
-				System.out.println("잘못된 입력입니다.");
+			}
+			case 2 -> System.out.println("프로그램을 종료합니다.");
+			default -> System.out.println("잘못된 입력입니다.");
 			}
 		}
 	}
@@ -52,8 +46,10 @@ public class MembershipManagement {
 		System.out.print("이메일: ");
 		String email = sc.nextLine();
 		System.out.print("생년: ");
-		int birthYear = sc.nextInt();
-		sc.nextLine();
+		int birthYear;
+
+		System.out.println("생년: ");
+		birthYear = getNumberInput();
 
 		User user = new User(username, password, name, email, birthYear);
 
@@ -64,6 +60,17 @@ public class MembershipManagement {
 		}
 	}
 
+	private static int getNumberInput() {
+		do {
+			System.out.print("> ");
+			try {
+				return Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("숫자만 입력 가능합니다.");
+			}
+		} while (true);
+	}
+
 	private static boolean login() {
 		int attempts = 0;
 		while (attempts < 3) {
@@ -71,28 +78,16 @@ public class MembershipManagement {
 			String username = sc.nextLine();
 			System.out.print("pw: ");
 			String password = sc.nextLine();
-			String loginSQL = """
-					SELECT USERNAME, PASSWORD, NAME, EMAIL, BIRTH
-					FROM XCI_MEMBERS
-					WHERE USERNAME = ? AND PASSWORD = ?
-					""";
-			try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-					PreparedStatement pstmt = conn.prepareStatement(loginSQL)) {
-				pstmt.setString(1, username);
-				pstmt.setString(2, password);
-				ResultSet rs = pstmt.executeQuery();
-				if (rs.next()) {
-					System.out.println("로그인 성공: " + rs.getString("NAME"));
-					loggedInUser = new User(username, password, rs.getString("NAME"), rs.getString("EMAIL"),
-							rs.getInt("BIRTH"));
-					return true;
-				} else {
-					System.out.println("아이디 혹은 패스워드가 틀립니다.");
-					attempts++;
-				}
-			} catch (SQLException e) {
-				System.out.println("로그인 중 오류가 발생했습니다: " + e.getMessage());
+
+			loggedInUser = userService.login(username, password);
+			if (loggedInUser != null) {
+				System.out.println("로그인 성공: " + loggedInUser.getName());
+
+			} else {
+				System.out.println("아이디 혹은 패스워드가 틀립니다.");
+				attempts++;
 			}
+
 		}
 		System.out.println("접속을 종료합니다.");
 		return false;
@@ -107,23 +102,20 @@ public class MembershipManagement {
 			System.out.println("3. 로그아웃");
 			System.out.println("----------------");
 			System.out.print("입력 > ");
-			int choice = sc.nextInt();
-			sc.nextLine();
+			int choice = getNumberInput();
 			switch (choice) {
-			case 0:
-				viewAndUpdateProfile();
-				break;
-			case 1:
+			case 0 -> viewAndUpdateProfile();
+			case 1 -> {
 				deleteUser();
-				return;
-			case 2:
-				searchUser();
-				break;
-			case 3:
 				loggedInUser = null;
 				return;
-			default:
-				System.out.println("잘못된 입력입니다.");
+			}
+			case 2 -> searchUser();
+			case 3 -> {
+				loggedInUser = null;
+				return;
+			}
+			default -> System.out.println("잘못된 입력입니다.");
 			}
 		}
 	}

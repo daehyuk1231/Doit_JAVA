@@ -19,8 +19,17 @@ public class UserService {
 			userDAO.signUp(user);
 			return true;
 		} catch (Exception e) {
-			System.out.println("$$$회원 가입 실패 : "+e.getMessage());
+			System.out.println("$$$회원 가입 실패 : " + e.getMessage());
 			return false;
+		}
+	}
+
+	public User login(String username, String password) {
+		try {
+			return userDAO.getUser(username, password);
+		} catch (Exception e) {
+			System.out.println("$$$로그인 실패 : " + e.getMessage());
+			return null;
 		}
 	}
 }
