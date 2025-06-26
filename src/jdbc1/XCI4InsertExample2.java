@@ -1,13 +1,7 @@
 package jdbc1;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.sql.*;
+import java.util.*;
 
 public class XCI4InsertExample2 {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521/xepdb1";
@@ -30,9 +24,9 @@ public class XCI4InsertExample2 {
 				""";
 
 		try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
-			
+
 			Map<Integer, String> validDepartments = new LinkedHashMap<>();
-			
+
 			try (PreparedStatement deptStmt = conn.prepareStatement(departmentsSQL);
 					ResultSet rs = deptStmt.executeQuery()) {
 				System.out.println("부서 목록:");
@@ -62,10 +56,9 @@ public class XCI4InsertExample2 {
 				if (validDepartments.containsKey(deptId)) {
 					break;
 				} else {
-					System.out.println("잘못된 부서번호입니다.");
+					System.out.println("잘못된 부서번호");
 				}
 			}
-
 			try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
 				pstmt.setString(1, lastName);
 				pstmt.setInt(2, salary);
@@ -75,14 +68,13 @@ public class XCI4InsertExample2 {
 
 				int rowsInserted = pstmt.executeUpdate();
 				if (rowsInserted > 0) {
-					System.out.println("입력 되었습니다!");
+					System.out.println("입력O");
 				} else {
-					System.out.println("입력된 행이 없습니다.");
+					System.out.println("입력X");
 				}
 			}
-
 		} catch (Exception e) {
-			System.err.println("오류");
+			System.err.println("에러");
 		}
 	}
 }
