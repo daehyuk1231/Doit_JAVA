@@ -30,7 +30,10 @@ public class MembershipManagement {
 				if (login())
 					afterLoginMenu();
 			}
-			case 2 -> System.out.println("프로그램을 종료합니다.");
+			case 2 -> {
+				System.out.println("프로그램을 종료합니다.");
+				System.exit(1);
+			}
 			default -> System.out.println("잘못된 입력입니다.");
 			}
 		}
